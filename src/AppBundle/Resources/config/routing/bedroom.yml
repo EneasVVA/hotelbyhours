@@ -1,0 +1,24 @@
+bedroom_index:
+    path:     /
+    defaults: { _controller: "AppBundle:BedRoom:index" }
+    methods:  GET
+
+bedroom_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:BedRoom:show" }
+    methods:  GET
+
+bedroom_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:BedRoom:new" }
+    methods:  [GET, POST]
+
+bedroom_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:BedRoom:edit" }
+    methods:  [GET, POST]
+
+bedroom_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:BedRoom:delete" }
+    methods:  DELETE

@@ -1,0 +1,4 @@
+app_bedroom:
+    resource: "@AppBundle/Resources/config/routing/bedroom.yml"
+    prefix:   /bedroom
+
