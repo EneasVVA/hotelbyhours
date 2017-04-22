@@ -6,6 +6,10 @@ app_bedroom:
     resource: "@AppBundle/Resources/config/routing/bedroom.yml"
     prefix:  /bedroom
 
+app_booking:
+    resource: "@AppBundle/Resources/config/routing/booking.yml"
+    prefix:  /booking
+
 register:
    resource: "@AppBundle/Resources/config/routing/registration.yml"
    prefix:  /register
