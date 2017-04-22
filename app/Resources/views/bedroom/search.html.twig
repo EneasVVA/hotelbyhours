@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="well-title">
+        <h2>Look for your room</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="well-block">
+
+                    <form method="get" action="{{ path('bedroom_index') }}">
+                        <!-- Form start -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label" for="name">Hotel name</label>
+                                    <input id="name" name="name" type="text" placeholder="Hotel name" class="form-control input-md">
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label" for="email">Location</label>
+                                    <input id="location" name="location" type="text" placeholder="Location" class="form-control input-md">
+                                </div>
+                            </div>
+                            <!-- Select Basic -->
+                            <div class="col-md-6">
+                                <label class="control-label" for="time">Preferred Date</label>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="time">From</label>
+                                                <input type="datetime-local" name="start-dd">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-offset-2">
+                                            <div class="form-group">
+                                                <label class="control-label" for="time">To</label>
+                                                <input type="datetime-local" name="end-dd">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Button -->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <button id="singlebutton" name="singlebutton" class="btn btn-default">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- form end -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

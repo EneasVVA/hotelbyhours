@@ -3,6 +3,13 @@ bedroom_index:
     defaults: { _controller: "AppBundle:BedRoom:index" }
     methods:  GET
 
+bedroom_search:
+    path:     /search
+    defaults:
+        _controller: "FrameworkBundle:Template:template"
+        template: 'bedroom/search.html.twig'
+    methods:  GET
+
 bedroom_show:
     path:     /{id}/show
     defaults: { _controller: "AppBundle:BedRoom:show" }
