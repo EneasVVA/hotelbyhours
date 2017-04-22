@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use AppBundle\DBAL\Type\RoomStatus;
-use AppBundle\DBAL\Type\RoomType;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
@@ -43,10 +42,10 @@ class BedRoom
     protected $status;
 
     /**
-     * @var string
+     * @var RoomType
      *
-     * @ORM\Column(name="type", type="RoomType", nullable=false)
-     * @DoctrineAssert\Enum(entity="AppBundle\DBAL\Type\RoomType")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\RoomType", cascade={"persist"})
+     *
      */
     protected $type;
 
@@ -121,11 +120,11 @@ class BedRoom
     /**
      * Set type
      *
-     * @param RoomType $type
+     * @param string $type
      *
      * @return BedRoom
      */
-    public function setType($type) : BedRoom
+    public function setType(RoomType $type) : BedRoom
     {
         $this->type = $type;
 
@@ -135,7 +134,7 @@ class BedRoom
     /**
      * Get type
      *
-     * @return string
+     * @return RoomType
      */
     public function getType()
     {

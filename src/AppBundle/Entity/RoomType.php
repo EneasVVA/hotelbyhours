@@ -48,7 +48,7 @@ class RoomType
     protected $price;
 
     /**
-     * @ORM\Column(name="images")
+     * @ORM\Column(name="images", nullable=true)
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\RoomImage", mappedBy="roomType")
      */
     protected $images;

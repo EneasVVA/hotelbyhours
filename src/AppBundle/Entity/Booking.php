@@ -66,7 +66,8 @@ class Booking
     /**
      * @var BedRoom
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\BedRoom")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\BedRoom")
+     * @ORM\JoinColumn(name="bedroom_id", referencedColumnName="id", nullable=false)
      */
     private $bedroom;
 
@@ -74,7 +75,7 @@ class Booking
     /**
      * @var Client
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User\Client")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User\Client")
      */
     private $client;
 

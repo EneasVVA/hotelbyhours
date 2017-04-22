@@ -23,8 +23,12 @@ use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
  * @ORM\Table(name="room_type")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RoomTypeRepository")
  */
-class RoomTypeRepository
+class RoomTypeRepository extends \Doctrine\ORM\EntityRepository
 {
 
-
+    public function price(RoomType $type)
+    {
+       // return $this->findOneBy(["type" => $type])->price();
+        return 33.3;
+    }
 }
