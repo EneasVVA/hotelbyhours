@@ -8,7 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Client;
 /**
  * Booking
  *
- * @ORM\Table(name="booking")
+ * @ORM\Table(name="booking", uniqueConstraints={@ORM\UniqueConstraint(name="booking_code_UNIQUE",
+ *     columns={"booking_code"})}, indexes={@ORM\Index(name="fk_cliente_idx",
+ *     columns={"id_client"}), @ORM\Index(name="fk_bedroom_idx", columns={"id_bedroom"})})
  * @ORM\Entity
  */
 class Booking
@@ -263,7 +265,7 @@ class Booking
      * @param Client $client
      * @return Booking
      */
-    public function setClient(Client $client): Booking
+    public function setClient(\AppBundle\Entity\User\Client $client): Booking
     {
         $this->client = $client;
         return $this;

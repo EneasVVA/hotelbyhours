@@ -11,6 +11,17 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class BookingController extends Controller
 {
 
+    public function indexAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $bookBedroom = $em->getRepository('AppBundle:Booking')->findBy(array("client"=>1));
+
+        return $this->render('booking/index.html.twig', array(
+            'bookingList' => $bookBedroom,
+        ));
+    }
+
     /**
      * Creates a new booking entity.
      *
@@ -29,10 +40,11 @@ class BookingController extends Controller
             $booking = new Booking();
             $booking->setStartDate($start_date_dt);
             $booking->setEndDate($end_date_dt);
-            $booking->setIdBedroom($bedroom);
-            $booking->setIdClient($client);
-            $booking->setClientName($client->getUsername());
-            $booking->setClientSurname("Client-Surname");
+            $booking->setBedroom($bedroom);
+            $booking->setClient($client);
+            $booking->setPrice(222);
+           /* $booking->setClientName($client->getUsername());
+            $booking->setClientSurname("Client-Surname");*/
             $booking->setCreatedat(new \DateTime('now'));
             $booking->setBookingCode($reservartionCode);
 
@@ -57,7 +69,7 @@ class BookingController extends Controller
                 );
             $this->get('mailer')->send($message);
 
-            return new RedirectResponse($this->generateUrl('bedroom_index'));
+            return new RedirectResponse($this->generateUrl('booking_index'));
         }else{
             echo "OK";
             die;
@@ -65,4 +77,5 @@ class BookingController extends Controller
 
 
     }
+
 }

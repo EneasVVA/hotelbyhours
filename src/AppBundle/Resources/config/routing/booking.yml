@@ -1,3 +1,8 @@
+booking_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Booking:index" }
+    methods:  GET
+
 booking_new:
     path:     /new
     defaults: { _controller: "AppBundle:Booking:new" }
