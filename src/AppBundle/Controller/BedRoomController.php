@@ -21,7 +21,7 @@ class BedRoomController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $name = null;
-        if(empty( $request->get('name'))) {
+        if(!empty( $request->get('name'))) {
             $name = $request->get('name');
         }
 

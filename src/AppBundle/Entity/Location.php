@@ -36,9 +36,9 @@ class Location
     private $street;
 
     /**
-     * @var int
+     * @var string
      *
-     * ORM\Column(name="zipcode", type="int")
+     * @ORM\Column(name="zipcode", type="string")
      */
     private $zipcode;
 
@@ -101,7 +101,7 @@ class Location
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function zipcode()
     {
@@ -109,10 +109,10 @@ class Location
     }
 
     /**
-     * @param int $zipcode
+     * @param string $zipcode
      * @return Location
      */
-    public function setZipcode(int $zipcode): Location
+    public function setZipcode($zipcode): Location
     {
         $this->zipcode = $zipcode;
         return $this;

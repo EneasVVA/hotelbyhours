@@ -78,7 +78,7 @@ class Booking
     private $clientSurname;
 
     /**
-     * @var \BedRoom
+     * @var BedRoom
      *
      * @ORM\ManyToOne(targetEntity="BedRoom")
      * @ORM\JoinColumns({

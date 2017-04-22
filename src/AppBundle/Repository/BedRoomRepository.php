@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\Query\Expr;
+
 /**
  * BedRoomRepository
  *
@@ -14,18 +16,25 @@ class BedRoomRepository extends \Doctrine\ORM\EntityRepository
     public function search($name, $location, $startDate, $endDate)
     {
         $stmt = $this->getEntityManager()->createQueryBuilder()
-                    ->select(array('u', 'h'))
+                    ->select(array('u', 'h', 'l'))
                     ->from('AppBundle:BedRoom', 'u')
-                    ->join('u.hotel', 'h');
+                    ->join('u.hotel', 'h')
+                    ->join('h.location', 'l');
 
         if(null !== $name) {
-            $stmt->andWhere("h.name LIKE :name ");
+            $stmt->andWhere("h.name LIKE :name");
             $stmt->setParameter("name", "%$name%");
         }
 
         if(null !== $location) {
-            $stmt->andWhere('u.hotel.location.all LIKE :location');
-            $stmt->setParameter("location", $location);
+
+            $stmt->andWhere($stmt->expr()->orX(
+                $stmt->expr()->like('l.city', ':location'),
+                $stmt->expr()->like('l.street', ':location'),
+                $stmt->expr()->like('l.zipcode', ':location')
+                ));
+
+            $stmt->setParameter("location", "%$location%");
         }
 
 
