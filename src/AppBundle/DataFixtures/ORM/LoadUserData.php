@@ -10,9 +10,11 @@
  */
 
 namespace AppBundle\DataFixtures\ORM;
+use AppBundle\Entity\User\Administrator;
 use AppBundle\Entity\User\Client;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use PUGX\MultiUserBundle\Doctrine\UserManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -52,10 +54,32 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $client->setDni("08365645N");
 
         $userManager->updateUser($client, true);
+        $this->createAdmin($userManager);
     }
+
+
 
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
+    }
+
+    private function createAdmin()
+    {
+        $discriminator = $this->container->get('pugx_user.manager.user_discriminator');
+        $discriminator->setClass(Administrator::class);
+
+        $userManager = $this->container->get('pugx_user_manager');
+
+        /** @var Administrator */
+        $admin = $userManager->createUser();
+
+        $admin->setUsername('admin1');
+        $admin->setEmail('admin@test.com');
+        $admin->setPlainPassword('123456');
+        $admin->setEnabled(true);
+        $admin->setRoles(['ROLE_ADMIN']);
+
+        $userManager->updateUser($admin, true);
     }
 }

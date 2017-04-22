@@ -8,21 +8,20 @@
  * file that was distributed with this source code.
  *
  */
+
 namespace AppBundle\Entity\User;
 
 use Doctrine\ORM\Mapping as ORM;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
-use FOS\UserBundle\Model\User as BaseUser;
+use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="user")
- * @ORM\InheritanceType("JOINED")
- * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"client" = "Client", "responsible" = "Responsible", "administrator" = "Administrator"})
- *
+ * @ORM\Table(name="administrator")
+ * @UniqueEntity(fields = "username", targetClass = "Acme\UserBundle\Entity\User\User", message="fos_user.username.already_used")
+ * @UniqueEntity(fields = "email", targetClass = "Acme\UserBundle\Entity\User\User", message="fos_user.email.already_used")
  */
-abstract class User extends BaseUser
+class Administrator extends User
 {
     /**
      * @ORM\Id
