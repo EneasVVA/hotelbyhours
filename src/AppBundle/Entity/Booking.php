@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Booking
  *
- * @ORM\Table(name="booking", indexes={@ORM\Index(name="fk_cliente_idx", columns={"id_client"}), @ORM\Index(name="fk_bedroom_idx", columns={"id_bedroom"})})
+ * @ORM\Table(name="booking", uniqueConstraints={@ORM\UniqueConstraint(name="booking_code_UNIQUE", columns={"booking_code"})}, indexes={@ORM\Index(name="fk_cliente_idx", columns={"id_client"}), @ORM\Index(name="fk_bedroom_idx", columns={"id_bedroom"})})
  * @ORM\Entity
  */
 class Booking
@@ -57,6 +57,27 @@ class Booking
     private $price;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="booking_code", type="string", length=6, nullable=true)
+     */
+    private $bookingCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="client_name", type="string", length=45, nullable=true)
+     */
+    private $clientName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="client_surname", type="string", length=45, nullable=true)
+     */
+    private $clientSurname;
+
+    /**
      * @var \BedRoom
      *
      * @ORM\ManyToOne(targetEntity="BedRoom")
@@ -67,9 +88,9 @@ class Booking
     private $idBedroom;
 
     /**
-     * @var \Client
+     * @var User\Client
      *
-     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\User\Client")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_client", referencedColumnName="id")
      * })
@@ -209,6 +230,78 @@ class Booking
     }
 
     /**
+     * Set bookingCode
+     *
+     * @param string $bookingCode
+     *
+     * @return Booking
+     */
+    public function setBookingCode($bookingCode)
+    {
+        $this->bookingCode = $bookingCode;
+
+        return $this;
+    }
+
+    /**
+     * Get bookingCode
+     *
+     * @return string
+     */
+    public function getBookingCode()
+    {
+        return $this->bookingCode;
+    }
+
+    /**
+     * Set clientName
+     *
+     * @param string $clientName
+     *
+     * @return Booking
+     */
+    public function setClientName($clientName)
+    {
+        $this->clientName = $clientName;
+
+        return $this;
+    }
+
+    /**
+     * Get clientName
+     *
+     * @return string
+     */
+    public function getClientName()
+    {
+        return $this->clientName;
+    }
+
+    /**
+     * Set clientSurname
+     *
+     * @param string $clientSurname
+     *
+     * @return Booking
+     */
+    public function setClientSurname($clientSurname)
+    {
+        $this->clientSurname = $clientSurname;
+
+        return $this;
+    }
+
+    /**
+     * Get clientSurname
+     *
+     * @return string
+     */
+    public function getClientSurname()
+    {
+        return $this->clientSurname;
+    }
+
+    /**
      * Set idBedroom
      *
      * @param \AppBundle\Entity\BedRoom $idBedroom
@@ -235,11 +328,11 @@ class Booking
     /**
      * Set idClient
      *
-     * @param \AppBundle\Entity\Client $idClient
+     * @param \AppBundle\Entity\User\Client $idClient
      *
      * @return Booking
      */
-    public function setIdClient(\AppBundle\Entity\Client $idClient = null)
+    public function setIdClient(\AppBundle\Entity\User\Client $idClient = null)
     {
         $this->idClient = $idClient;
 
@@ -249,7 +342,7 @@ class Booking
     /**
      * Get idClient
      *
-     * @return \AppBundle\Entity\Client
+     * @return \AppBundle\Entity\User\Client
      */
     public function getIdClient()
     {
