@@ -5,6 +5,8 @@ namespace AppBundle\Entity;
 use AppBundle\DBAL\Type\RoomStatus;
 use AppBundle\DBAL\Type\RoomType;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 /**
@@ -47,6 +49,12 @@ class BedRoom
      */
     protected $type;
 
+    /**
+     * @var Hotel
+     *
+     * @ManyToOne(targetEntity="AppBundle\Entity\Hotel", inversedBy="rooms")
+     */
+    protected $hotel;
 
     /**
      * Get id
@@ -126,6 +134,26 @@ class BedRoom
     {
         return $this->type;
     }
+
+    /**
+     * @return mixed
+     */
+    public function hotel()
+    {
+        return $this->hotel;
+    }
+
+    /**
+     * @param mixed $hotel
+     * @return BedRoom
+     */
+    public function setHotel($hotel)
+    {
+        $this->hotel = $hotel;
+        return $this;
+    }
+
+
 
 
 }
