@@ -1,0 +1,4 @@
+booking_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Booking:new" }
+    methods:  [GET, POST]
