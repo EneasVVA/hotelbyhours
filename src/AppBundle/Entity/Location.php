@@ -118,6 +118,10 @@ class Location
         return $this;
     }
 
+    public function address()
+    {
+        return "$this->street, $this->city, $this->zipcode";
+    }
 
 }
 

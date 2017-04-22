@@ -45,7 +45,7 @@ class LoadRoomsData extends LoadHotelData implements OrderedFixtureInterface, Fi
         $room->setType(RoomType::SINGULAR);
         $room->setNumber(2);
         $room->setStatus(RoomStatus::VACANT);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[0]->getId()));
+        $room->setHotel($manager->find(Hotel::class,self::$hotels[1]->getId()));
 
         $manager->persist($room);
 
@@ -85,7 +85,7 @@ class LoadRoomsData extends LoadHotelData implements OrderedFixtureInterface, Fi
         $room->setType(RoomType::DOUBLE);
         $room->setNumber(11);
         $room->setStatus(RoomStatus::VACANT);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[0]->getId()));
+        $room->setHotel($manager->find(Hotel::class,self::$hotels[1]->getId()));
 
         $manager->persist($room);
 
@@ -93,7 +93,7 @@ class LoadRoomsData extends LoadHotelData implements OrderedFixtureInterface, Fi
         $room->setType(RoomType::TRIPLE);
         $room->setNumber(12);
         $room->setStatus(RoomStatus::VACANT);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[0]->getId()));
+        $room->setHotel($manager->find(Hotel::class,self::$hotels[1]->getId()));
 
         $manager->persist($room);
 
@@ -101,7 +101,7 @@ class LoadRoomsData extends LoadHotelData implements OrderedFixtureInterface, Fi
         $room->setType(RoomType::TRIPLE);
         $room->setNumber(13);
         $room->setStatus(RoomStatus::VACANT);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[0]->getId()));
+        $room->setHotel($manager->find(Hotel::class,self::$hotels[1]->getId()));
 
         $manager->persist($room);
 
@@ -109,7 +109,7 @@ class LoadRoomsData extends LoadHotelData implements OrderedFixtureInterface, Fi
         $room->setType(RoomType::SUIT);
         $room->setNumber(14);
         $room->setStatus(RoomStatus::VACANT);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[0]->getId()));
+        $room->setHotel($manager->find(Hotel::class,self::$hotels[1]->getId()));
 
         $manager->persist($room);
 

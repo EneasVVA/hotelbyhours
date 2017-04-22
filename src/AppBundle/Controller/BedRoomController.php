@@ -16,11 +16,21 @@ class BedRoomController extends Controller
      * Lists all bedRoom entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $bedRooms = $em->getRepository('AppBundle:BedRoom')->findAll();
+        $name = null;
+        if(empty( $request->get('name'))) {
+            $name = $request->get('name');
+        }
+
+        $location = null;
+        if(!empty( $request->get('location') )) {
+            $location = $request->get('location');
+        }
+
+        $bedRooms = $em->getRepository('AppBundle:BedRoom')->search($name, $location, null, null);
 
         return $this->render('bedroom/index.html.twig', array(
             'bedRooms' => $bedRooms,

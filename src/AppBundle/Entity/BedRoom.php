@@ -7,6 +7,7 @@ use AppBundle\DBAL\Type\RoomType;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToOne;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 /**
@@ -57,6 +58,12 @@ class BedRoom
     protected $hotel;
 
     /**
+     * @var RoomServices
+     *
+     * @OneToOne(targetEntity="AppBundle\Entity\RoomServices", cascade={"persist"} )
+     */
+    protected $services;
+    /**
      * Get id
      *
      * @return int
@@ -91,7 +98,7 @@ class BedRoom
     }
 
     /**
-     * @return RoomStatus
+     * @return string
      */
     public function getStatus()
     {
@@ -128,7 +135,7 @@ class BedRoom
     /**
      * Get type
      *
-     * @return RoomType
+     * @return string
      */
     public function getType()
     {

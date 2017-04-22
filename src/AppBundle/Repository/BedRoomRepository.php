@@ -10,4 +10,26 @@ namespace AppBundle\Repository;
  */
 class BedRoomRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function search($name, $location, $startDate, $endDate)
+    {
+        $stmt = $this->getEntityManager()->createQueryBuilder()
+                    ->select(array('u', 'h'))
+                    ->from('AppBundle:BedRoom', 'u')
+                    ->join('u.hotel', 'h');
+
+        if(null !== $name) {
+            $stmt->andWhere("h.name LIKE :name ");
+            $stmt->setParameter("name", "%$name%");
+        }
+
+        if(null !== $location) {
+            $stmt->andWhere('u.hotel.location.all LIKE :location');
+            $stmt->setParameter("location", $location);
+        }
+
+
+        return $stmt->getQuery()->getResult();
+
+    }
 }
