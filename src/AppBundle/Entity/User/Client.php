@@ -121,5 +121,10 @@ class Client extends User
         return $this;
     }
 
+    function __toString()
+    {
+        return parent::getUsername();
+    }
+
 
 }

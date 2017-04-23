@@ -119,6 +119,11 @@ class Hotel
         return $this;
     }
 
+    function __toString()
+    {
+        return $this->getName();
+    }
+
 
 }
 

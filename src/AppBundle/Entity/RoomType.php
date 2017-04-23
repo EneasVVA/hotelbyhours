@@ -134,6 +134,10 @@ class RoomType
         return $this;
     }
 
+    function __toString()
+    {
+        return $this->type();
+    }
 
 
 }

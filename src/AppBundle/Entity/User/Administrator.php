@@ -29,4 +29,9 @@ class Administrator extends User
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    function __toString()
+    {
+        return parent::getUsername();
+    }
 }

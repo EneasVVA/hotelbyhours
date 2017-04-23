@@ -1,5 +1,7 @@
 easy_admin:
   entities:
+    - AppBundle\Entity\Hotel
+    - AppBundle\Entity\Location
     - AppBundle\Entity\BedRoom
     - AppBundle\Entity\Booking
     - AppBundle\Entity\RoomType

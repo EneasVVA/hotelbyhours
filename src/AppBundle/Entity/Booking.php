@@ -274,6 +274,10 @@ class Booking
         return $this;
     }
 
+    function __toString()
+    {
+        return sprintf("Reserved from %s to %s in %.2f", $this->startDate, $this->endDate, $this->price);
+    }
 
 
 }

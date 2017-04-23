@@ -123,5 +123,11 @@ class Location
         return "$this->street, $this->city, $this->zipcode";
     }
 
+    function __toString()
+    {
+        return $this->address();
+    }
+
+
 }
 

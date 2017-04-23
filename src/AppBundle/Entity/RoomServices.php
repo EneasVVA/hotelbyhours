@@ -166,7 +166,11 @@ class RoomServices
         return $this;
     }
 
-
+    function __toString()
+    {
+        return sprintf("Jacuzzi: %d, Minibar: %d, Internet: %d, Television: %d, Aircondition: %d",
+                        $this->jacuzzi, $this->minibar, $this->internet, $this->television, $this->aircondition);
+    }
 
 
 }
