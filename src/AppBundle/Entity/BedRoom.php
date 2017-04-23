@@ -205,7 +205,10 @@ class BedRoom
         $this->bookings = $bookings;
     }
 
-
+    function __toString()
+    {
+        return sprintf("%s - %s", $this->hotel->getName(), $this->type->type());
+    }
 
 
 }

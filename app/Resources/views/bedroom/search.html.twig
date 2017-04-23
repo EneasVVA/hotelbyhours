@@ -22,7 +22,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label" for="email">Location</label>
-                                    <input id="location" name="location" type="text" placeholder="Location" class="form-control input-md">
+                                    <input id="location" name="location" type="text" placeholder="Location" value="{{ app.request.get('location', '') }}" class="form-control input-md">
                                 </div>
                             </div>
                             <!-- Select Basic -->
