@@ -42,7 +42,7 @@ class BedRoomRepositoryTest extends KernelTestCase
     /**
      * @test
      */
-    public function testSearchLocation()
+    public function testSearchLocationShould()
     {
         /** @var BedRoomRepository $repo */
         $repo = $this->em

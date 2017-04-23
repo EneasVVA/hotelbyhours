@@ -38,7 +38,7 @@ class LoadBookingsData extends LoadRoomsData implements OrderedFixtureInterface,
     {
         $clients = $manager->getRepository(Client::class)->findAll();
         foreach(self::$rooms as $room) {
-            for ($i = 0; $i < 200; $i++) {
+            for ($i = 0; $i < 50; $i++) {
                 $booking = new Booking();
                 $startDate = (new DateTime())->add(DateInterval::createFromDateString(sprintf('%d days + %d hours', rand(0, 60), rand(0, 24))));
                 $endDate = (clone $startDate)->add(DateInterval::createFromDateString(sprintf('%d hours', rand(2, 6))));
