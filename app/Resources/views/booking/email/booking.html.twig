@@ -1,16 +1,17 @@
 
-<h3>You did it! You registered!</h3>
+<h3>You did it!</h3>
 
-Hi {{ name }}! You successfully booked your room.
+Hi {{ name }}!, You successfully booked your room.
 
 <br/><br/><br/>
-
-<b>Here is your room information:</b>
+<h3>Here is your room information:</h3>
 
 <li>Reservation code: {{ reservationCode }}</li>
 <li>Date start: {{ startDate|date('d/m/Y H:i') }}</li>
 <li>Date end: {{ endDate|date('d/m/Y H:i') }}</li>
-
-To login, go to: <a href="{{ url('bedroom_index') }}">Link</a>.
+<li>Total price: {{ price }} €</li>
+<br/><br/><br/>
+To check your reservation information, go to: <a href="{{ url('bedroom_index') }}">Link</a>.
+<br/><br/><br/>
 
 Thanks!
