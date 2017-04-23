@@ -2,6 +2,9 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\BedRoom;
+use AppBundle\Entity\Booking;
+use AppBundle\Model\Result;
 use DateTime;
 use Doctrine\ORM\Query\Expr;
 
@@ -38,8 +41,33 @@ class BedRoomRepository extends \Doctrine\ORM\EntityRepository
             $stmt->setParameter("location", "%$location%");
         }
 
+        $rooms = $stmt->getQuery()->getResult();
 
-        return $stmt->getQuery()->getResult();
+        $stmt = $this->getEntityManager()->createQueryBuilder()
+                ->select(array('u'))
+                ->from('AppBundle:Booking', 'u')
+                ->where(
+                    $stmt->expr()->orX(
+                        $stmt->expr()->andX($stmt->expr()->gte( 'u.startDate', ':startDate'), $stmt->expr()->lte('u.startDate', ':endDate')),
+                        $stmt->expr()->andX($stmt->expr()->lte( 'u.startDate', ':startDate'), $stmt->expr()->lte('u.endDate', ':endDate'))
+                    )
+                )
+                ->andWhere('u.bedroom IN (:rooms)')
+
+                ->setParameter('startDate', $startDate)
+                ->setParameter('endDate', $endDate)
+                ->setParameter('rooms', $rooms)
+            ;
+        /** @var BedRoom[] */
+        $roomsBookeds = array_map(function(Booking $v) {
+            return $v->bedroom();
+        }, $stmt->getQuery()->getResult());
+
+        return array_filter($rooms, function(BedRoom $room) use($roomsBookeds) {
+            return !in_array($room, $roomsBookeds);
+        });
+
+
 
     }
 }

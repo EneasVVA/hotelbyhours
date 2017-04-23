@@ -66,7 +66,7 @@ class Booking
     /**
      * @var BedRoom
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\BedRoom")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\BedRoom", inversedBy="bookings")
      * @ORM\JoinColumn(name="bedroom_id", referencedColumnName="id", nullable=false)
      */
     private $bedroom;

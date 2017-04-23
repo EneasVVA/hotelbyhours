@@ -3,9 +3,11 @@
 namespace AppBundle\Entity;
 
 use AppBundle\DBAL\Type\RoomStatus;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
@@ -62,6 +64,18 @@ class BedRoom
      * @OneToOne(targetEntity="AppBundle\Entity\RoomServices", cascade={"persist"} )
      */
     protected $services;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @OneToMany(targetEntity="AppBundle\Entity\Booking", mappedBy="bedroom")
+     */
+    protected $bookings;
+
+    public function __constructs() {
+        $this->bookings = new ArrayCollection();
+    }
+
     /**
      * Get id
      *
@@ -157,6 +171,38 @@ class BedRoom
     {
         $this->hotel = $hotel;
         return $this;
+    }
+
+    /**
+     * @return RoomServices
+     */
+    public function services()
+    {
+        return $this->services;
+    }
+
+    /**
+     * @param RoomServices $services
+     */
+    public function setServices(RoomServices $services)
+    {
+        $this->services = $services;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function bookings()
+    {
+        return $this->bookings;
+    }
+
+    /**
+     * @param ArrayCollection $bookings
+     */
+    public function setBookings($bookings)
+    {
+        $this->bookings = $bookings;
     }
 
 
