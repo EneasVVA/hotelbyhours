@@ -10,6 +10,11 @@ bedroom_search:
         template: 'bedroom/search.html.twig'
     methods:  GET
 
+bedroom_results:
+    path:     /results
+    defaults: { _controller: "AppBundle:BedRoom:results" }
+    methods:  GET
+
 bedroom_show:
     path:     /{id}/show
     defaults: { _controller: "AppBundle:BedRoom:show" }

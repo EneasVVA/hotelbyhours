@@ -9,7 +9,7 @@
             <div class="col-md-8">
                 <div class="well-block">
 
-                    <form method="get" action="{{ path('bedroom_index') }}">
+                    <form method="get" action="{{ path('bedroom_results') }}">
                         <!-- Form start -->
                         <div class="row">
                             <div class="col-md-12">
@@ -22,7 +22,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label" for="email">Location</label>
-                                    <input id="location" name="location" type="text" placeholder="Location" class="form-control input-md">
+                                    <input id="location" name="location" type="text" placeholder="Location" value="{{ app.request.get('location', '') }}" class="form-control input-md">
                                 </div>
                             </div>
                             <!-- Select Basic -->

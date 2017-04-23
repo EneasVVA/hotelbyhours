@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\BedRoom;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,11 +13,21 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class BedRoomController extends Controller
 {
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $bedRooms = $em->getRepository('AppBundle:BedRoom')->findAll();
+
+        return $this->render('bedroom/index.html.twig', array(
+            'bedRooms' => $bedRooms,
+        ));
+    }
     /**
      * Lists all bedRoom entities.
      *
      */
-    public function indexAction(Request $request)
+    public function resultsAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -30,9 +41,20 @@ class BedRoomController extends Controller
             $location = $request->get('location');
         }
 
-        $bedRooms = $em->getRepository('AppBundle:BedRoom')->search($name, $location, null, null);
+        $startDate = new DateTime();
+        if(!empty( $request->get('start-dd'))) {
+            $startDate = new DateTime($request->get('start-dd'));
+        }
 
-        return $this->render('bedroom/index.html.twig', array(
+        $endDate = new DateTime('+ 1 day');
+        if(!empty( $request->get('end-dd'))) {
+            $endDate = new DateTime($request->get('end-dd'));
+        }
+
+        $bedRooms = $em->getRepository('AppBundle:BedRoom')->search($name, $location, $startDate, $endDate);
+
+        dump($bedRooms);
+        return $this->render('bedroom/results.html.twig', array(
             'bedRooms' => $bedRooms,
         ));
     }

@@ -1,7 +1,7 @@
 easy_admin:
   entities:
     - AppBundle\Entity\BedRoom
-    - AppBundle\Entity\RoomImage
+    - AppBundle\Entity\Booking
     - AppBundle\Entity\RoomType
     - AppBundle\Entity\User\Client
     - AppBundle\Entity\User\Responsible

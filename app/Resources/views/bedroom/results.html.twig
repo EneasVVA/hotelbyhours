@@ -1,19 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Bedrooms list</h1>
     <div class="container">
+        <div class="row">
+            <h1>Showing available rooms</h1>
+        </div>
         <div class="row">
 
             <table width="100%" class="table table-striped table-bordered table-hover">
                 <thead>
-                    <tr>
-                        <th>Hotel</th>
-                        <th>Number</th>
-                        <th>Status</th>
-                        <th>Type</th>
-                        <th>Actions</th>
-                    </tr>
+                <tr>
+                    <th>Hotel</th>
+                    <th>Number</th>
+                    <th>Status</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
                 </thead>
                 <tbody>
                 {% for bedRoom in bedRooms %}
@@ -33,7 +35,7 @@
                                 </li>
                                 <li>
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                    <a href="{{ path('booking_new', { 'bedroom': bedRoom.id ,'start_date': "22/04/2017 00:00:00", 'end_date': "22/04/2017 05:00:00" }) }}">Reservar</a>
+                                    <a href="{{ path('booking_new', { 'bedroom': bedRoom.id ,'start_date': "22/04/2017 00:00:00", 'end_date': "22/04/2017 01:00:00" }) }}">Reservar</a>
                                 </li>
                             </ul>
                         </td>
@@ -44,9 +46,4 @@
 
         </div>
     </div>
-    <ul>
-        <li>
-            <a href="{{ path('bedroom_new') }}">Create a new bedRoom</a>
-        </li>
-    </ul>
 {% endblock %}

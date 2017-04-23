@@ -13,6 +13,7 @@ namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Hotel;
 use AppBundle\Entity\Location;
+use AppBundle\Entity\RoomType;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -24,7 +25,15 @@ use Doctrine\Common\Persistence\ObjectManager;
 class LoadHotelData implements OrderedFixtureInterface, FixtureInterface
 {
 
+    /**
+     * @var Hotel[]
+     */
     protected static $hotels = [];
+
+    /**
+     * @var RoomType[]
+     */
+    protected static $roomTypes = [];
 
     /**
      * Load data fixtures with the passed EntityManager
