@@ -11,6 +11,17 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class BookingController extends Controller
 {
 
+    public function indexAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $bookBedroom = $em->getRepository('AppBundle:Booking')->findBy(array("client"=>1));
+
+        return $this->render('booking/index.html.twig', array(
+            'bookingList' => $bookBedroom,
+        ));
+    }
+
     /**
      * Creates a new booking entity.
      *
