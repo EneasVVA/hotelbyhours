@@ -1,0 +1,7 @@
+client_registration:
+  path: /client
+  defaults: { _controller: AppBundle:Registration:registerClient }
+
+responsible_registration:
+  path: /responsible
+  defaults: { _controller: AppBundle:Registration:registerResponsible }
