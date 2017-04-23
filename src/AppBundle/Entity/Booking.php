@@ -2,8 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\User\Client;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bundle\FrameworkBundle\Client;
 
 /**
  * Booking
@@ -25,14 +25,14 @@ class Booking
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="start_date", type="datetime", nullable=true)
+     * @ORM\Column(name="start_date", type="datetime", nullable=false)
      */
     private $startDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end_date", type="datetime", nullable=true)
+     * @ORM\Column(name="end_date", type="datetime", nullable=false)
      */
     private $endDate;
 
@@ -59,7 +59,7 @@ class Booking
     /**
      * @var string
      *
-     * @ORM\Column(name="booking_code", type="string", length=6, unique=true, nullable=true)
+     * @ORM\Column(name="booking_code", type="string", length=6)
      */
     private $bookingCode;
 
@@ -76,6 +76,8 @@ class Booking
      * @var Client
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User\Client")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
+
      */
     private $client;
 

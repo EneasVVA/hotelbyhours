@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use DateTime;
 use Doctrine\ORM\Query\Expr;
 
 /**
@@ -13,7 +14,7 @@ use Doctrine\ORM\Query\Expr;
 class BedRoomRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function search($name, $location, $startDate, $endDate)
+    public function search($name, $location, DateTime $startDate, DateTime $endDate)
     {
         $stmt = $this->getEntityManager()->createQueryBuilder()
                     ->select(array('u', 'h', 'l'))

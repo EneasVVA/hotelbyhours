@@ -14,7 +14,9 @@ namespace AppBundle\DataFixtures\ORM;
 use AppBundle\Entity\BedRoom;
 use AppBundle\Entity\Booking;
 use AppBundle\Entity\RoomType;
+use AppBundle\Entity\User\Client;
 use DateInterval;
+use DateTime;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -34,16 +36,19 @@ class LoadBookingsData extends LoadRoomsData implements OrderedFixtureInterface,
      */
     public function load(ObjectManager $manager)
     {
+        $clients = $manager->getRepository(Client::class)->findAll();
         foreach(self::$rooms as $room) {
             for ($i = 0; $i < 200; $i++) {
                 $booking = new Booking();
-                $dt = new \DateTime();
-
-                $booking->setStartDate($dt->add(DateInterval::createFromDateString(sprintf('%d hours', rand(0, 150)))));
-                $booking->setEndDate($dt->add(DateInterval::createFromDateString(sprintf('%d hours', rand(2, 6)))));
+                $startDate = (new DateTime())->add(DateInterval::createFromDateString(sprintf('%d days + %d hours', rand(0, 60), rand(0, 24))));
+                $endDate = (clone $startDate)->add(DateInterval::createFromDateString(sprintf('%d hours', rand(2, 6))));
+                $booking->setStartDate($startDate);
+                $booking->setEndDate($endDate);
                 $bedroom = $manager->find(BedRoom::class, $room->getId());
                 $booking->setBedroom($bedroom);
                 $booking->setPrice($bedroom->getType()->price());
+                $booking->setClient($clients[$i%sizeof($clients)]);
+                $booking->setBookingCode(rand(100000, 999999));
 
                 $manager->persist($booking);
 

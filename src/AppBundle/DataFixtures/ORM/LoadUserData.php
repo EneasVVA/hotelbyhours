@@ -37,27 +37,37 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
      */
     public function load(ObjectManager $manager)
     {
+        $this->generateClients($manager);
+        $this->createAdmin();
+    }
+
+
+    public function generateClients(ObjectManager $manager)
+    {
         $discriminator = $this->container->get('pugx_user.manager.user_discriminator');
         $discriminator->setClass(Client::class);
 
         $userManager = $this->container->get('pugx_user_manager');
 
-        /** @var Client $client */
-        $client = $userManager->createUser();
+        for($i=0; $i < 15; $i++)
+        {
+            /** @var Client $client */
+            $client = $userManager->createUser();
 
-        $client->setUsername('client1');
-        $client->setEmail('client1@test.com');
-        $client->setPlainPassword('123456');
-        $client->setEnabled(true);
-        $client->setName("Client1");
-        $client->setSurname("Client1Surname");
-        $client->setDni("08365645N");
+            $client->setUsername("client$i");
+            $client->setEmail("client$i@test.com");
+            $client->setPlainPassword('123456');
+            $client->setEnabled(true);
+            $client->setName("Client$i");
+            $client->setSurname("Client$i Surname");
+            $client->setDni("08365645N");
 
-        $userManager->updateUser($client, true);
-        $this->createAdmin($userManager);
+            $userManager->updateUser($client, false);
+            
+        }
+        $manager->flush();
+
     }
-
-
 
     public function setContainer(ContainerInterface $container = null)
     {
