@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\User\Responsible;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
 
@@ -37,6 +38,13 @@ class Hotel
     private $location;
 
     /**
+     * @var Responsible
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User\Responsible", cascade={"persist"})
+     */
+    private $responsible;
+
+    /**
      * @var BedRoom
      *
      * @OneToMany(targetEntity="AppBundle\Entity\BedRoom", mappedBy="hotel")
@@ -51,6 +59,30 @@ class Hotel
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set responsible
+     *
+     * @param Responsible $responsible
+     *
+     * @return Hotel
+     */
+    public function setResponsible($responsible)
+    {
+        $this->responsible = $responsible;
+
+        return $this;
+    }
+
+    /**
+     * Get responsible
+     *
+     * @return Responsible
+     */
+    public function getResponsible()
+    {
+        return $this->responsible;
     }
 
     /**
