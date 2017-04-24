@@ -22,21 +22,28 @@ use PHPUnit\Framework\TestCase;
  */
 class ResultTest extends TestCase
 {
+    /**
+     * @test
+     */
     public function shouldReturnADatetime()
     {
         $result = new Result();
 
         $result->setDatetime(new \DateTime());
 
-        $this->assertInstanceOf(DateTime::class, $result);
+        $this->assertInstanceOf(DateTime::class, $result->datetime());
     }
 
+    /**
+     * @test
+     */
     public function shouldReturnABedroom()
     {
         $result = new Result();
 
-        $result->setBedrooms(new BedRoom());
+        $result->setBedrooms([new BedRoom(), new BedRoom()]);
 
-        $this->assertInstanceOf(BedRoom::class, $result);
+        $this->assertInternalType('array', $result->bedrooms());
+        $this->assertInstanceOf(BedRoom::class, $result->bedrooms()[0]);
     }
 }
