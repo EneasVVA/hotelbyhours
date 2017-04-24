@@ -8,9 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Booking
  *
- * @ORM\Table(name="booking", uniqueConstraints={@ORM\UniqueConstraint(name="booking_code_UNIQUE",
- *     columns={"booking_code"})}, indexes={@ORM\Index(name="fk_cliente_idx",
- *     columns={"id_client"}), @ORM\Index(name="fk_bedroom_idx", columns={"id_bedroom"})})
+ * @ORM\Table(name="booking")
  * @ORM\Entity
  */
 class Booking
@@ -77,6 +75,7 @@ class Booking
     /**
      * @var Client
      *
+     * @ORM\Column(name="id_client")
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User\Client")
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
 

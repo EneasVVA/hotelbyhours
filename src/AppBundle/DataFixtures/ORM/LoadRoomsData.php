@@ -37,98 +37,102 @@ class LoadRoomsData extends LoadHotelData implements OrderedFixtureInterface, Fi
      */
     public function load(ObjectManager $manager)
     {
+        foreach(self::$hotels as $hotel) {
+            $hotel = $manager->getRepository(Hotel::class)->find($hotel->getId());
 
-        $room = new BedRoom();
-        $room->setType(self::$roomTypes[RoomType::SINGULAR][0]);
-        $room->setNumber(1);
-        $room->setStatus(RoomStatus::VACANT);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[0]->getId()));
-        self::$rooms[] = $room;
+            $room = new BedRoom();
+            $room->setType(self::$roomTypes[RoomType::SINGULAR][0]);
+            $room->setNumber(1);
+            $room->setStatus(RoomStatus::VACANT);
+            $room->setHotel($hotel);
+            self::$rooms[] = $room;
 
-        $manager->persist($room);
+            $manager->persist($room);
 
-        $room = new BedRoom();
-        $room->setType(self::$roomTypes[RoomType::SINGULAR][1]);
-        $room->setNumber(2);
-        $room->setStatus(RoomStatus::VACANT);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[1]->getId()));
-        self::$rooms[] = $room;
+            $room = new BedRoom();
+            $room->setType(self::$roomTypes[RoomType::SINGULAR][1]);
+            $room->setNumber(2);
+            $room->setStatus(RoomStatus::VACANT);
+            $room->setHotel($hotel);
+            self::$rooms[] = $room;
 
-        $manager->persist($room);
+            $manager->persist($room);
 
-        $room = new BedRoom();
-        $room->setType(self::$roomTypes[RoomType::SINGULAR][2]);
-        $room->setNumber(3);
-        $room->setStatus(RoomStatus::VACANT);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[0]->getId()));
-        self::$rooms[] = $room;
+            $room = new BedRoom();
+            $room->setType(self::$roomTypes[RoomType::SINGULAR][2]);
+            $room->setNumber(3);
+            $room->setStatus(RoomStatus::VACANT);
+            $room->setHotel($hotel);
+            self::$rooms[] = $room;
 
-        $manager->persist($room);
+            $manager->persist($room);
 
-        $room = new BedRoom();
-        $room->setType(self::$roomTypes[RoomType::SINGULAR][3]);
-        $room->setNumber(4);
-        $room->setStatus(RoomStatus::VACANT);
-        self::$rooms[] = $room;
+            $room = new BedRoom();
+            $room->setType(self::$roomTypes[RoomType::SINGULAR][3]);
+            $room->setNumber(4);
+            $room->setStatus(RoomStatus::VACANT);
+            $room->setHotel($hotel);
 
-        $manager->persist($room);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[0]->getId()));
+            self::$rooms[] = $room;
 
-        $room = new BedRoom();
-        $room->setType(self::$roomTypes[RoomType::DOUBLE][0]);
-        $room->setNumber(5);
-        $room->setStatus(RoomStatus::VACANT);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[0]->getId()));
-        self::$rooms[] = $room;
+            $manager->persist($room);
+            $room->setHotel($manager->find(Hotel::class, $hotel));
 
-        $manager->persist($room);
+            $room = new BedRoom();
+            $room->setType(self::$roomTypes[RoomType::DOUBLE][0]);
+            $room->setNumber(5);
+            $room->setStatus(RoomStatus::VACANT);
+            $room->setHotel($hotel);
+            self::$rooms[] = $room;
 
-        $room = new BedRoom();
-        $room->setType(self::$roomTypes[RoomType::DOUBLE][1]);
-        $room->setNumber(10);
-        $room->setStatus(RoomStatus::VACANT);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[0]->getId()));
-        self::$rooms[] = $room;
+            $manager->persist($room);
 
-        $manager->persist($room);
+            $room = new BedRoom();
+            $room->setType(self::$roomTypes[RoomType::DOUBLE][1]);
+            $room->setNumber(10);
+            $room->setStatus(RoomStatus::VACANT);
+            $room->setHotel($hotel);
+            self::$rooms[] = $room;
 
-        $room = new BedRoom();
-        $room->setType(self::$roomTypes[RoomType::DOUBLE][2]);
-        $room->setNumber(11);
-        $room->setStatus(RoomStatus::VACANT);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[1]->getId()));
-        self::$rooms[] = $room;
+            $manager->persist($room);
 
-        $manager->persist($room);
+            $room = new BedRoom();
+            $room->setType(self::$roomTypes[RoomType::DOUBLE][2]);
+            $room->setNumber(11);
+            $room->setStatus(RoomStatus::VACANT);
+            $room->setHotel($hotel);
+            self::$rooms[] = $room;
 
-        $room = new BedRoom();
-        $room->setType(self::$roomTypes[RoomType::TRIPLE][0]);
-        $room->setNumber(12);
-        $room->setStatus(RoomStatus::VACANT);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[1]->getId()));
-        self::$rooms[] = $room;
+            $manager->persist($room);
 
-        $manager->persist($room);
+            $room = new BedRoom();
+            $room->setType(self::$roomTypes[RoomType::TRIPLE][0]);
+            $room->setNumber(12);
+            $room->setStatus(RoomStatus::VACANT);
+            $room->setHotel($hotel);
+            self::$rooms[] = $room;
 
-        $room = new BedRoom();
-        $room->setType(self::$roomTypes[RoomType::TRIPLE][0]);
-        $room->setNumber(13);
-        $room->setStatus(RoomStatus::VACANT);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[1]->getId()));
-        self::$rooms[] = $room;
+            $manager->persist($room);
 
-        $manager->persist($room);
+            $room = new BedRoom();
+            $room->setType(self::$roomTypes[RoomType::TRIPLE][0]);
+            $room->setNumber(13);
+            $room->setStatus(RoomStatus::VACANT);
+            $room->setHotel($hotel);
+            self::$rooms[] = $room;
 
-        $room = new BedRoom();
-        $room->setType(self::$roomTypes[RoomType::SUIT][0]);
-        $room->setNumber(14);
-        $room->setStatus(RoomStatus::VACANT);
-        $room->setHotel($manager->find(Hotel::class,self::$hotels[1]->getId()));
-        self::$rooms[] = $room;
+            $manager->persist($room);
 
-        $manager->persist($room);
+            $room = new BedRoom();
+            $room->setType(self::$roomTypes[RoomType::SUIT][0]);
+            $room->setNumber(14);
+            $room->setStatus(RoomStatus::VACANT);
+            $room->setHotel($hotel);
+            self::$rooms[] = $room;
 
+            $manager->persist($room);
 
+        }
         $manager->flush();
     }
 

@@ -42,7 +42,7 @@ class BedRoomRepositoryTest extends KernelTestCase
     /**
      * @test
      */
-    public function testSearchLocationShould()
+    public function shouldReturnNonEmptyRoomsSetWhenSearchByCity()
     {
         /** @var BedRoomRepository $repo */
         $repo = $this->em
@@ -53,6 +53,37 @@ class BedRoomRepositoryTest extends KernelTestCase
         $this->assertInternalType('array', $rooms);
         $this->assertGreaterThan(0, count($rooms));
     }
+
+    /**
+     * @test
+     */
+    public function shouldReturnNonEmptyRoomsSetWhenSearchByName()
+    {
+        /** @var BedRoomRepository $repo */
+        $repo = $this->em
+            ->getRepository('AppBundle:BedRoom')
+        ;
+        $rooms = $repo->search("aljardin", null, null, null);
+
+        $this->assertInternalType('array', $rooms);
+        $this->assertGreaterThan(0, count($rooms));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnNonEmptyRoomsSetWhenSearchDate()
+    {
+        /** @var BedRoomRepository $repo */
+        $repo = $this->em
+            ->getRepository('AppBundle:BedRoom')
+        ;
+        $rooms = $repo->search(null, null, new DateTime(), new DateTime('+ 1 hours'));
+
+        $this->assertInternalType('array', $rooms);
+        $this->assertGreaterThan(0, count($rooms));
+    }
+
 
     /**
      * {@inheritDoc}

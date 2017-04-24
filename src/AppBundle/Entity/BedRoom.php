@@ -9,11 +9,11 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 /**
  * BedRoom
- *
  * @ORM\Table(name="bed_room")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BedRoomRepository")
  */
@@ -31,7 +31,7 @@ class BedRoom
     /**
      * @var int
      *
-     * @ORM\Column(name="number", type="integer", unique=true)
+     * @ORM\Column(name="number", type="integer")
      */
     protected $number;
 

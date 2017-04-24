@@ -12,6 +12,7 @@
 namespace AppBundle\Entity\User;
 
 use Doctrine\ORM\Mapping as ORM;
+
 use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
 
