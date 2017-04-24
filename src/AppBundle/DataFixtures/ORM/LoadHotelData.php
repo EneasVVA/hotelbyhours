@@ -14,6 +14,7 @@ namespace AppBundle\DataFixtures\ORM;
 use AppBundle\Entity\Hotel;
 use AppBundle\Entity\Location;
 use AppBundle\Entity\RoomType;
+use AppBundle\Entity\User\Responsible;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -48,6 +49,14 @@ class LoadHotelData implements OrderedFixtureInterface, FixtureInterface
         $location->setCity("Villanueva de la Serena");
         $location->setStreet("Avd. Chile 16");
         $location->setZipcode("06700");
+        $responsible = new Responsible();
+        $responsible->setUsername('ResponsibleAljardin');
+        $responsible->setEmail('ResponsibleAljardin@test.com');
+        $responsible->setPlainPassword('123456');
+        $responsible->setEnabled(true);
+        $responsible->setRoles(['ROLE_RESPONSIBLE']);
+        $hotel->setResponsible($responsible);
+
         $hotel->setLocation($location);
 
         $manager->persist($hotel);
@@ -60,6 +69,13 @@ class LoadHotelData implements OrderedFixtureInterface, FixtureInterface
         $location->setStreet("Calle Alcala, 100");
         $location->setZipcode("28022");
         $hotel->setLocation($location);
+        $responsible = new Responsible();
+        $responsible->setUsername('ResponsibleMadrid');
+        $responsible->setEmail('ResponsibleMadrid@test.com');
+        $responsible->setPlainPassword('123456');
+        $responsible->setEnabled(true);
+        $responsible->setRoles(['ROLE_RESPONSIBLE']);
+        $hotel->setResponsible($responsible);
 
         $manager->persist($hotel);
         self::$hotels[] = $hotel;
