@@ -1,0 +1,4 @@
+responsible_index:
+  path: /
+  defaults: { _controller: "AppBundle:Responsible:index" }
+  methods: GET

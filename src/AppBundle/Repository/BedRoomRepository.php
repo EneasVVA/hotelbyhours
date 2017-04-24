@@ -17,7 +17,7 @@ use Doctrine\ORM\Query\Expr;
 class BedRoomRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function search($name, $location, ?DateTime $startDate, ?DateTime $endDate)
+    public function search($name, $location, DateTime $startDate, DateTime $endDate)
     {
         $stmt = $this->getEntityManager()->createQueryBuilder()
                     ->select(array('u', 'h', 'l'))
