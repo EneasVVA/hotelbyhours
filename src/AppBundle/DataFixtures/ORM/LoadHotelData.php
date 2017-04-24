@@ -14,6 +14,7 @@ namespace AppBundle\DataFixtures\ORM;
 use AppBundle\Entity\Hotel;
 use AppBundle\Entity\Location;
 use AppBundle\Entity\RoomType;
+use AppBundle\Entity\User\Responsible;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -48,6 +49,13 @@ class LoadHotelData implements OrderedFixtureInterface, FixtureInterface
         $location->setCity("Villanueva de la Serena");
         $location->setStreet("Avd. Chile 16");
         $location->setZipcode("06700");
+        $responsible = new Responsible();
+        $responsible->setUsername('ResponsibleAljardin');
+        $responsible->setEmail('ResponsibleAljardin@test.com');
+        $responsible->setPlainPassword('123456');
+        $responsible->setEnabled(true);
+        $responsible->setRoles(['ROLE_RESPONSIBLE']);
+        $hotel->setResponsible($responsible);
         $hotel->setLocation($location);
 
         $manager->persist($hotel);
@@ -59,38 +67,13 @@ class LoadHotelData implements OrderedFixtureInterface, FixtureInterface
         $location->setCity("Madrid");
         $location->setStreet("Calle Alcala, 100");
         $location->setZipcode("28022");
-        $hotel->setLocation($location);
-
-        $manager->persist($hotel);
-        self::$hotels[] = $hotel;
-
-
-        $hotel = new Hotel();
-        $hotel->setName("Hotel Barcelona");
-        $location = new Location();
-        $location->setCity("Barcelona");
-        $location->setStreet("Calle San Jordi, 111");
-        $location->setZipcode("33553");
-        $hotel->setLocation($location);
-        $manager->persist($hotel);
-        self::$hotels[] = $hotel;
-
-        $hotel = new Hotel();
-        $hotel->setName("Hotel Venus");
-        $location = new Location();
-        $location->setCity("Valencia");
-        $location->setStreet("Calle Joan Manuel Serrat, 22");
-        $location->setZipcode("026485");
-        $hotel->setLocation($location);
-        $manager->persist($hotel);
-        self::$hotels[] = $hotel;
-
-        $hotel = new Hotel();
-        $hotel->setName("Motel M40");
-        $location = new Location();
-        $location->setCity("Madrid");
-        $location->setStreet("Calle Alcala, 100");
-        $location->setZipcode("22002");
+        $responsible = new Responsible();
+        $responsible->setUsername('ResponsibleMadrid');
+        $responsible->setEmail('ResponsibleMadrid@test.com');
+        $responsible->setPlainPassword('123456');
+        $responsible->setEnabled(true);
+        $responsible->setRoles(['ROLE_RESPONSIBLE']);
+        $hotel->setResponsible($responsible);
         $hotel->setLocation($location);
 
         $manager->persist($hotel);
