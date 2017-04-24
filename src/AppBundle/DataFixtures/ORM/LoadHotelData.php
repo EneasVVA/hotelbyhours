@@ -56,6 +56,7 @@ class LoadHotelData implements OrderedFixtureInterface, FixtureInterface
         $responsible->setEnabled(true);
         $responsible->setRoles(['ROLE_RESPONSIBLE']);
         $hotel->setResponsible($responsible);
+
         $hotel->setLocation($location);
 
         $manager->persist($hotel);
@@ -67,6 +68,7 @@ class LoadHotelData implements OrderedFixtureInterface, FixtureInterface
         $location->setCity("Madrid");
         $location->setStreet("Calle Alcala, 100");
         $location->setZipcode("28022");
+        $hotel->setLocation($location);
         $responsible = new Responsible();
         $responsible->setUsername('ResponsibleMadrid');
         $responsible->setEmail('ResponsibleMadrid@test.com');
@@ -74,6 +76,37 @@ class LoadHotelData implements OrderedFixtureInterface, FixtureInterface
         $responsible->setEnabled(true);
         $responsible->setRoles(['ROLE_RESPONSIBLE']);
         $hotel->setResponsible($responsible);
+
+        $manager->persist($hotel);
+        self::$hotels[] = $hotel;
+
+
+        $hotel = new Hotel();
+        $hotel->setName("Hotel Barcelona");
+        $location = new Location();
+        $location->setCity("Barcelona");
+        $location->setStreet("Calle San Jordi, 111");
+        $location->setZipcode("33553");
+        $hotel->setLocation($location);
+        $manager->persist($hotel);
+        self::$hotels[] = $hotel;
+
+        $hotel = new Hotel();
+        $hotel->setName("Hotel Venus");
+        $location = new Location();
+        $location->setCity("Valencia");
+        $location->setStreet("Calle Joan Manuel Serrat, 22");
+        $location->setZipcode("026485");
+        $hotel->setLocation($location);
+        $manager->persist($hotel);
+        self::$hotels[] = $hotel;
+
+        $hotel = new Hotel();
+        $hotel->setName("Motel M40");
+        $location = new Location();
+        $location->setCity("Madrid");
+        $location->setStreet("Calle Alcala, 100");
+        $location->setZipcode("22002");
         $hotel->setLocation($location);
 
         $manager->persist($hotel);
