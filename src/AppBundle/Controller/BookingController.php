@@ -13,13 +13,21 @@ class BookingController extends Controller
 
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $auth_checker = $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY');
 
-        $bookBedroom = $em->getRepository('AppBundle:Booking')->findBy(array("client"=>1));
+        if ($auth_checker) {
+            $user = $this->get('security.token_storage')->getToken()->getUser();
+            $em = $this->getDoctrine()->getManager();
 
-        return $this->render('booking/index.html.twig', array(
-            'bookingList' => $bookBedroom,
-        ));
+            $bookBedroom = $em->getRepository('AppBundle:Booking')->findBy(array("client"=>$user->getId()));
+
+            return $this->render('booking/index.html.twig', array(
+                'bookingList' => $bookBedroom,
+            ));
+        }
+        else{
+            return $this->redirect('/login');
+        }
     }
 
     /**
@@ -35,7 +43,7 @@ class BookingController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $bedroom = $em->getRepository('AppBundle:BedRoom')->find($request->query->get('bedroom'));
-            $client = $em->getRepository('AppBundle:User\Client')->find(1);
+            $client = $em->getRepository('AppBundle:User\Client')->find($user->getId());
 
             if(!is_null($bedroom) && !is_null($client)){
                 $start_date_dt = \DateTime::createFromFormat('d/m/Y H:i:s', $request->query->get('start_date'));
@@ -54,7 +62,7 @@ class BookingController extends Controller
                 $booking->setEndDate($end_date_dt);
                 $booking->setBedroom($bedroom);
                 $booking->setPrice($price);
-                $booking->setClient($user);
+                $booking->setClient($client);
                 $booking->setCreatedat(new \DateTime('now'));
                 $booking->setBookingCode($reservartionCode);
 
