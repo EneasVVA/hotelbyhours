@@ -11,6 +11,7 @@
 
 namespace tests\AppBundle\Model;
 
+use AppBundle\Entity\BedRoom;
 use AppBundle\Model\Result;
 use DateTime;
 use PHPUnit\Framework\TestCase;
@@ -21,12 +22,21 @@ use PHPUnit\Framework\TestCase;
  */
 class ResultTest extends TestCase
 {
-    public function shouldReturnABedroom()
+    public function shouldReturnADatetime()
     {
         $result = new Result();
 
         $result->setDatetime(new \DateTime());
 
         $this->assertInstanceOf(DateTime::class, $result);
+    }
+
+    public function shouldReturnABedroom()
+    {
+        $result = new Result();
+
+        $result->setBedrooms(new BedRoom());
+
+        $this->assertInstanceOf(BedRoom::class, $result);
     }
 }
