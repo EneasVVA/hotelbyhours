@@ -12,6 +12,7 @@
 namespace AppBundle\DataFixtures\ORM;
 use AppBundle\Entity\User\Administrator;
 use AppBundle\Entity\User\Client;
+use AppBundle\Entity\User\Responsible;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use PUGX\MultiUserBundle\Doctrine\UserManager;
@@ -39,6 +40,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
     {
         $this->generateClients($manager);
         $this->createAdmin();
+        $this->createResponsible();
     }
 
 
@@ -91,5 +93,24 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $admin->setRoles(['ROLE_ADMIN']);
 
         $userManager->updateUser($admin, true);
+    }
+
+    private function createResponsible()
+    {
+        $discriminator = $this->container->get('pugx_user.manager.user_discriminator');
+        $discriminator->setClass(Responsible::class);
+
+        $userManager = $this->container->get('pugx_user_manager');
+
+        /** @var Responsible */
+        $responsible = $userManager->createUser();
+
+        $responsible->setUsername('respon1');
+        $responsible->setEmail('respon1@test.com');
+        $responsible->setPlainPassword('123456');
+        $responsible->setEnabled(true);
+        $responsible->setRoles(['ROLE_RESPONSIBLE']);
+
+        $userManager->updateUser($responsible, true);
     }
 }

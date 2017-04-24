@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1>Showing reserved rooms</h1>
+        </div>
+        <div class="row">
+
+            <table width="100%" class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Type</th>
+                    <th>id</th>
+                    <th>startDate</th>
+                    <th>endDate</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.bedRoom.number }}</td>
+                        <td>{{ booking.bedRoom.type.type|readable_enum }}</td>
+                        <td>{{ booking.id }}</td>
+                        <td>{{ booking.startDate | date("D/M/Y H:i:s") }}</td>
+                        <td>{{ booking.endDate  | date("D/M/Y  H:i:s") }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+{% endblock %}
